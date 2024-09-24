@@ -9,7 +9,7 @@ export default function ImagePage() {
   useEffect(() => {
     async function fetchPost() {
       try {
-        const result = await axios.get(`http://api-wallpapers.sa-east-1.elasticbeanstalk.com/api/posts/${imageName}`);
+        const result = await axios.get(`/api/posts/${imageName}`);
         setPost(result.data); 
       } catch (error) {
         console.error("Erro ao buscar imagem:", error);
