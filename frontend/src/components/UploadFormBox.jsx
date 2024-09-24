@@ -62,7 +62,7 @@ export default function NewPost() {
       formData.append("image", file);
       formData.append("caption", caption.toLowerCase().trim());
 
-      await axios.post("http://api-wallpapers.sa-east-1.elasticbeanstalk.com/api/posts", formData, {
+      await axios.post("/api/posts", formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }

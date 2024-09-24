@@ -7,7 +7,7 @@ export default function SizeImage({imageSize, imageWidth, minIndex, maxIndex}) {
 
   useEffect(() => {
     async function getPosts() {
-      const result = await axios.get(`http://api-wallpapers.sa-east-1.elasticbeanstalk.com/api/posts/${imageSize}`)
+      const result = await axios.get(`/api/posts/${imageSize}`)
       setPosts(result.data)
     }
     getPosts()
