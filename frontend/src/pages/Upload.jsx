@@ -2,7 +2,7 @@ import NewPost from "../components/UploadFormBox";
 
 export default function Upload() {
   return(
-    <main className="p-[30px] mt-[80px]">
+    <main className="p-[30px] mt-[60px]">
       <div className="flex flex-col items-center justify-center text-white">
         <NewPost/>
       </div>

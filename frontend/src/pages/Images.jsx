@@ -7,7 +7,7 @@ export default function ImagesPage() {
 
   useEffect(() => {
     async function getPosts() {
-      const result = await axios.get("http://api-wallpapers.sa-east-1.elasticbeanstalk.com/api/posts/latest");
+      const result = await axios.get("/api/posts/latest");
       setPosts(result.data);
     }
     getPosts()

@@ -2,7 +2,7 @@ import { Link, NavLink, Outlet } from "react-router-dom";
 
 export default function Header() {
   return(
-    <>
+    <div className="flex flex-col">
       <header className="fixed top-0 h-[60px] w-full bg-[#141618] z-[200] flex items-center [box-shadow:inset_0_0_0_1px_rgba(31,_31,_31,_.66),_0_0_10px_rgba(0,_0,_0,_.75),_0_0_10px_rgba(0,_0,_0,_.75)] px-[40px] justify-between">
         <div className="flex items-center h-full">
           <Link to="/" className="flex">
@@ -27,7 +27,7 @@ export default function Header() {
         </div>
       </header>
       <Outlet/>
-    </>
+    </div>
   )
 }
 
