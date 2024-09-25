@@ -7,7 +7,7 @@ export default function ImagesPage() {
 
   useEffect(() => {
     async function getPosts() {
-      const result = await axios.get("/api/posts/latest");
+      const result = await axios.get("http://api-wallpapers.sa-east-1.elasticbeanstalk.com/api/posts/latest");
       setPosts(result.data);
     }
     getPosts()
@@ -15,7 +15,7 @@ export default function ImagesPage() {
 
   return(
     <>
-      <div className="bg-[radial-gradient(400px_80px_at_0px_top,_rgba(31,179,207,.4),_transparent)] pl-[40px] pt-[20px] mt-[60px]">
+      <div className="bg-[radial-gradient(400px_80px_at_0px_top,_rgba(3,227,184,.4),_transparent)] pl-[40px] pt-[20px] mt-[60px]">
         <h3 className="text-white text-[30px] font-bold [text-shadow:1px_2px_4px_#000]">Mais Recentes</h3>
         <p className="text-white font-[600]">
           Últimos wallpapers postados por nossos usuários!

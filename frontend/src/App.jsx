@@ -13,7 +13,7 @@ export default function App() {
         <Route element={<Header/>}>
           <Route path="recentes" element={<ImagesPage/>}/>
           <Route path="upload" element={<UploadPage/>}/>
-          <Route path="wallpapers/:imageName" element={<ImagePage/>}/>
+          <Route path="wp/:imageName" element={<ImagePage/>}/>
         </Route>
       </Routes>
     </BrowserRouter>

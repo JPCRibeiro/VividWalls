@@ -73,16 +73,16 @@ export default function NewPost() {
   };
 
   return(
-    <div className="flex flex-col text-center [box-shadow:1px_1px_5px_rgba(0,_0,_0,_.33)] p-[40px] bg-[#222431] rounded-[3px]">
+    <div className="flex flex-col text-center [box-shadow:1px_1px_5px_rgba(0,_0,_0,_.33)] p-[40px] bg-[#15161a] rounded-[3px]">
       <h1 className="text-center text-white font-bold text-[46px] title leading-[48px]">VividWalls</h1>
       <h3 className="font-[500] text-[16px] mb-[20px]">Adicione um wallpaper ao nosso site!</h3>
       <div className="flex flex-col items-start w-full mb-[20px] gap-[10px]">
         <label className="text-[18px] flex items-center gap-[10px]">
           Descrição da imagem {captionError && ( <FontAwesomeIcon icon={faTriangleExclamation} className="text-[#ad3e3e]"/> )}
         </label>
-        <input id="descricao" value={caption} onChange={handleCaption} type="text" className={`p-[10px] px-[14px] bg-[#333c4b] placeholder:font-[500] border-[2px] w-full rounded-[3px] text-white outline-none ${captionError ? "border-[#ad3e3e] placeholder:text-[#ad3e3e]" : "border-[#1FB3CF]"}`} placeholder="Descrição"/>
+        <input id="descricao" value={caption} onChange={handleCaption} type="text" className={`p-[10px] px-[14px] bg-[#1a1c21] placeholder:font-[500] border-[2px] w-full rounded-[3px] text-white outline-none ${captionError ? "border-[#ad3e3e] placeholder:text-[#ad3e3e]" : "border-[#03E3B8]"}`} placeholder="Descrição"/>
       </div>
-      <div className="text-center w-[700px] bg-[#30324B] rounded-t-[3px] py-[12px] flex gap-[20px] items-center justify-center shadow-[inset_0_0_.75em_rgba(255,_255,_255,_.02),_0_2px_0_#1c1c1c,_0_3px_4px_-3px_#000,_0_1px_2px_rgba(0,_0,_0,_.2)]">
+      <div className="text-center w-[700px] bg-[#1e1f23] rounded-t-[3px] py-[12px] flex gap-[20px] items-center justify-center shadow-[inset_0_0_.75em_rgba(255,_255,_255,_.02),_0_2px_0_#1c1c1c,_0_3px_4px_-3px_#000,_0_1px_2px_rgba(0,_0,_0,_.2)]">
         <span className="font-[600]">Solte uma imagem abaixo</span>
         <span className="text-[14px]">ou</span>
         <label className="bg-white p-[8px] rounded-[5px] cursor-pointer text-black font-[500] shadow-[0_3px_0_#afafaf] active:shadow-none active:translate-y-[2px]">
@@ -107,8 +107,8 @@ export default function NewPost() {
           { !imgURL && <FontAwesomeIcon icon={faFileImage} className="text-[60px] text-[#2a2c3f] absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]"/> }
         </div>
       </label>
-      <div className="text-center w-[700px] bg-[#30324B] rounded-b-[3px] pt-[8px] pb-[12px] flex gap-[20px] items-center justify-center shadow-[inset_0_0_.75em_rgba(255,_255,_255,_.02),_0_2px_0_#1c1c1c,_0_3px_4px_-3px_#000,_0_1px_2px_rgba(0,_0,_0,_.2)]">
-        <button onClick={handleSubmit} className="py-[6px] px-[14px] rounded-[5px] font-[500] text-[#141618] text-[14px] bg-[#1FB3CF] shadow-[0_3px_0_#0072ff] active:shadow-none active:translate-y-[2px]">Submit</button>
+      <div className="text-center w-[700px] bg-[#1e1f23] rounded-b-[3px] pt-[8px] pb-[12px] flex gap-[20px] items-center justify-center shadow-[inset_0_0_.75em_rgba(255,_255,_255,_.02),_0_2px_0_#1c1c1c,_0_3px_4px_-3px_#000,_0_1px_2px_rgba(0,_0,_0,_.2)]">
+        <button onClick={handleSubmit} className="py-[6px] px-[14px] rounded-[5px] font-[500] text-[#141618] text-[14px] bg-[#03E3B8] shadow-[0_3px_0_#028b71] active:shadow-none active:translate-y-[2px]">Submit</button>
       </div>
     </div>
   ) 

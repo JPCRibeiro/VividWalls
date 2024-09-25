@@ -63,7 +63,7 @@ app.get("/api/posts/small", async (req, res) => {
   const posts = await prisma.posts.findMany({ orderBy: [{ created: 'asc' }] });
 
   for (const post of posts) {
-    const url = `https:/${bucketname}.s3.${bucketRegion}.amazonaws.com/uploads/small/${post.imageName}`;
+    const url = `https://${bucketname}.s3.${bucketRegion}.amazonaws.com/uploads/small/${post.imageName}`;
     post.imageUrl = url;
   }
 
@@ -74,7 +74,7 @@ app.get("/api/posts/latest", async (req, res) => {
   const posts = await prisma.posts.findMany({ orderBy: [{ created: 'desc' }] });
 
   for (const post of posts) {
-    const url = `https:/${bucketname}.s3.${bucketRegion}.amazonaws.com/uploads/small/${post.imageName}`;
+    const url = `https://${bucketname}.s3.${bucketRegion}.amazonaws.com/uploads/small/${post.imageName}`;
     post.imageUrl = url;
   }
 

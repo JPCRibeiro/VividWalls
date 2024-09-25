@@ -9,23 +9,21 @@ export default function Header() {
             <h2 className="font-bold text-white text-[28px] select-none title">VividWalls</h2>
           </Link>
           <div className="flex gap-[20px] text-[18px] text-white ml-[24px] h-full">
-            <NavLink to="recentes" className={({ isActive }) => `flex items-center relative after:content-[''] after:absolute after:w-full after:h-[4px] after:bottom-0 after:bg-[#1FB3CF] after:origin-left ${isActive ? "" : "after:scale-x-[0] hover:after:scale-x-[1] after:[transition:transform_0.15s_ease-in] hover:after:origin-left"}`}>
+            <NavLink to="recentes" className={({ isActive }) => `flex items-center relative after:content-[''] after:absolute after:w-full after:h-[4px] after:bottom-0 after:bg-[#03E3B8] after:origin-left ${isActive ? "" : "after:scale-x-[0] hover:after:scale-x-[1] after:[transition:transform_0.15s_ease-in] hover:after:origin-left"}`}>
               Recentes
             </NavLink>
-            <NavLink to="upload" className={({ isActive }) => `flex items-center relative after:content-[''] after:absolute after:w-full after:h-[4px] after:bottom-0 after:bg-[#1FB3CF] after:origin-left ${isActive ? "" : "after:scale-x-[0] hover:after:scale-x-[1] after:[transition:transform_0.15s_ease-in] hover:after:origin-left"}`}> 
+            <NavLink to="upload" className={({ isActive }) => `flex items-center relative after:content-[''] after:absolute after:w-full after:h-[4px] after:bottom-0 after:bg-[#03E3B8] after:origin-left ${isActive ? "" : "after:scale-x-[0] hover:after:scale-x-[1] after:[transition:transform_0.15s_ease-in] hover:after:origin-left"}`}> 
               Upload
             </NavLink>
           </div>
         </div>
         <div className="flex gap-[10px] font-[500] text-[#141618] text-[14px]">
-          {/*
-          <button className="py-[6px] px-[10px] rounded-[5px] bg-[#1FB3CF] shadow-[0_3px_0_#0072ff] active:shadow-none active:translate-y-[2px]">
+          <button className="py-[6px] px-[10px] rounded-[5px] bg-[#03E3B8] shadow-[0_3px_0_#028b71] active:shadow-none active:translate-y-[2px]">
             Cadastrar
           </button> 
           <button className="py-[6px] px-[14px] rounded-[5px] bg-white shadow-[0_3px_0_#afafaf] active:shadow-none active:translate-y-[2px]">
             Login
           </button>
-          */}
         </div>
       </header>
       <Outlet/>
