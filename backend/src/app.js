@@ -86,7 +86,11 @@ app.get("/api/posts/:imageName", async (req, res) => {
 
   try {
     const post = await prisma.posts.findFirst({
-      where: { imageName: imageName },
+      where: {
+        imageName: {
+          startsWith: imageName
+        }
+      }
     });
 
     if (!post) {

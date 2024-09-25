@@ -17,7 +17,7 @@ export default function SizeImage({imageSize, imageWidth, minIndex, maxIndex}) {
     <div className="max-w-[1560px] justify-center inline-flex flex-nowrap">
       {posts.slice(minIndex, maxIndex).map(post => (
         <span key={`post-${post.id}`} className="p-[4px]">
-          <Link to={`/wallpapers/${post.imageName}`}>
+          <Link to={`/wp/${post.imageName}`}>
             <img width={imageWidth} src={post.imageUrl} alt={post.caption} className="max-w-full rounded-[5px] inline-block [box-shadow:2px_2px_5px_rgba(0,_0,_0,_.5)] hover:brightness-[130%] hover:[box-shadow:2px_2px_8px_rgba(0,_0,_0,_.8)] [transition:.25s]"/>
           </Link>
         </span>
