@@ -6,6 +6,6 @@
     { "source": "/api/login", "destination": "http://vividwalls-api.sa-east-1.elasticbeanstalk.com/api/login" },
     { "source": "/api/register", "destination": "http://vividwalls-api.sa-east-1.elasticbeanstalk.com/api/register" },
     { "source": "/api/user", "destination": "http://vividwalls-api.sa-east-1.elasticbeanstalk.com/api/user" },
-    { "source": "/api/user", "destination": "http://vividwalls-api.sa-east-1.elasticbeanstalk.com/api/logout" }
+    { "source": "/api/logout", "destination": "http://vividwalls-api.sa-east-1.elasticbeanstalk.com/api/logout" }
   ]
 }

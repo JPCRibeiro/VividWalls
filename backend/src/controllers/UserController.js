@@ -32,7 +32,7 @@ class UserController {
       res.cookie("token", token, {
         httpOnly: true,
         maxAge: 30 * 60 * 1000,
-        secure: false,
+        secure: true,
       });
 
       res.status(200).json({ token });
