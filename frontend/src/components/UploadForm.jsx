@@ -2,8 +2,10 @@ import { useRef, useState } from "react";
 import axios from "axios";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFileImage } from '@fortawesome/free-regular-svg-icons';
-import { faTriangleExclamation } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from "react-router-dom";
+import * as Yup from "yup";
+import Button from "./Button";
+import InputComponent from "./Input";
 
 export default function NewPost() {
   const [file, setFile] = useState();
@@ -15,6 +17,12 @@ export default function NewPost() {
   const inputFile = useRef(null);
   const [imgURL, setImgURL] = useState("");
   const navigate = useNavigate();
+
+  const validationSchema = Yup.object().shape({
+    caption: Yup.string()
+      .trim()
+      .required("Descrição da imagem é obrigatório"),
+  });
 
   const handleFile = (selectedFile) => {
     if (selectedFile) {
@@ -42,57 +50,58 @@ export default function NewPost() {
     handleFile(selectedFile); 
   };
 
-  const handleCaption = (e) => {
-    setCaption(e.target.value);
-    if (e.target.value.trim() !== "") {
-      setCaptionError(false);
-    }
-  };
+  const handleSubmit = async () => {
+    const formValues = {
+      caption: caption.trim(),
+      file
+    };
+    
+    try {
+      await validationSchema.validate(formValues, { abortEarly: false });
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (caption.trim() === "") {
-      setCaptionError(true);
-    } 
-    else if (!file) {
-      return;
-    } else {
-      setCaptionError(false);
+      setCaptionError(null);
+
       const formData = new FormData();
       formData.append("image", file);
       formData.append("caption", caption.toLowerCase().trim());
 
-      await axios.post("/api/posts", formData, {
+      await axios.post("http://localhost:8080/api/posts", formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
       });
 
       navigate("/recentes");
+    } catch (error) {
+      if (error instanceof Yup.ValidationError) {
+        error.inner.forEach((error) => {
+          if (error.path === "caption") {
+            setCaptionError(error.message);
+          } 
+        });
+      } else {
+        console.error("Erro ao criar post:", error);
+      }
     }
   };
 
   return(
-    <div className="flex flex-col text-center [box-shadow:1px_1px_5px_rgba(0,_0,_0,_.33)] p-[40px] bg-[#15161a] rounded-[3px]">
+    <div className="flex flex-col text-center shadow-[1px_10px_15px_rgba(0,_0,_0,_.7)] p-[40px] bg-[#15161a] rounded-[3px]">
       <h1 className="text-center text-white font-bold text-[46px] title leading-[48px]">VividWalls</h1>
       <h3 className="font-[500] text-[16px] mb-[20px]">Adicione um wallpaper ao nosso site!</h3>
-      <div className="flex flex-col items-start w-full mb-[20px] gap-[10px]">
-        <label className="text-[18px] flex items-center gap-[10px]">
-          Descrição da imagem {captionError && ( <FontAwesomeIcon icon={faTriangleExclamation} className="text-[#ad3e3e]"/> )}
-        </label>
-        <input id="descricao" value={caption} onChange={handleCaption} type="text" className={`p-[10px] px-[14px] bg-[#1a1c21] placeholder:font-[500] border-[2px] w-full rounded-[3px] text-white outline-none ${captionError ? "border-[#ad3e3e] placeholder:text-[#ad3e3e]" : "border-[#03E3B8]"}`} placeholder="Descrição"/>
+      <div className="w-full">
+        <InputComponent label="Descrição" id="descricao" title={caption} setTitle={setCaption} type="text" error={captionError} setError={setCaptionError} autocomplete="descricao"/>
       </div>
       <div className="text-center w-[700px] bg-[#1e1f23] rounded-t-[3px] py-[12px] flex gap-[20px] items-center justify-center shadow-[inset_0_0_.75em_rgba(255,_255,_255,_.02),_0_2px_0_#1c1c1c,_0_3px_4px_-3px_#000,_0_1px_2px_rgba(0,_0,_0,_.2)]">
         <span className="font-[600]">Solte uma imagem abaixo</span>
         <span className="text-[14px]">ou</span>
-        <label className="bg-white p-[8px] rounded-[5px] cursor-pointer text-black font-[500] shadow-[0_3px_0_#afafaf] active:shadow-none active:translate-y-[2px]">
-          clique aqui
-          <input id="input-file" ref={inputFile} onChange={fileSelected} type="file" accept="image/*" hidden/>
-        </label>
+        <div>
+          <Button as="label" text="Clique aqui" color="white" inputFile={inputFile} fileSelected={fileSelected}/>
+        </div>
       </div>
       <label className="w-[700px] h-[250px]" onDragOver={dragImage} onDrop={dropImage}>
         <input id="input-file" ref={inputFile} onChange={fileSelected} type="file" accept="image/*" hidden/>
-        <div className="relative bg-[#141618] h-full flex justify-center items-center bg-[repeating-linear-gradient(45deg,_#1a1c23,_#1a1c23_2em,_#16191e_2em,_#16191e_4em)] shadow-[inset_.33em_.33em_1.5em_rgba(0,_0,_0,_.33)]" onChange={fileSelected}>
+        <div className="relative bg-[#141618] cursor-pointer h-full flex justify-center items-center bg-[repeating-linear-gradient(45deg,_#1a1c23,_#1a1c23_2em,_#16191e_2em,_#16191e_4em)] shadow-[inset_.33em_.33em_1.5em_rgba(0,_0,_0,_.33)]" onChange={fileSelected}>
           <div className="relative rounded-b-[3px] inline-block shadow-[0_0_4px_rgba(0,_0,_0,_.8)] pt-[20px]">
             { imgURL && (
               <>
@@ -107,9 +116,7 @@ export default function NewPost() {
           { !imgURL && <FontAwesomeIcon icon={faFileImage} className="text-[60px] text-[#2a2c3f] absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]"/> }
         </div>
       </label>
-      <div className="text-center w-[700px] bg-[#1e1f23] rounded-b-[3px] pt-[8px] pb-[12px] flex gap-[20px] items-center justify-center shadow-[inset_0_0_.75em_rgba(255,_255,_255,_.02),_0_2px_0_#1c1c1c,_0_3px_4px_-3px_#000,_0_1px_2px_rgba(0,_0,_0,_.2)]">
-        <button onClick={handleSubmit} className="py-[6px] px-[14px] rounded-[5px] font-[500] text-[#141618] text-[14px] bg-[#03E3B8] shadow-[0_3px_0_#028b71] active:shadow-none active:translate-y-[2px]">Submit</button>
-      </div>
+      <button className="text-black justify-center font-[500] w-full flex py-[6px] px-[18px] rounded-b-[10px] rounded-t-[0px] active:shadow-none active:translate-y-[2px] bg-primary-color shadow-[0_3px_0_#028b71]" onClick={handleSubmit}>Enviar</button>
     </div>
   ) 
 }

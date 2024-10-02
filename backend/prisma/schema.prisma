@@ -15,3 +15,10 @@ model Posts {
   totalLikes    Int      @default(0)
   created       DateTime @default(now())
 }
+
+model Users {
+  id            Int      @id @default(autoincrement())
+  email         String   @unique
+  username      String   @unique
+  password      String 
+}

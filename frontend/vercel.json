@@ -1,7 +1,11 @@
 {
   "rewrites": [
-    { "source": "/api/posts/latest", "destination": "http://api-wallpapers.sa-east-1.elasticbeanstalk.com/api/posts/latest" },
-    { "source": "/api/posts/(.*)", "destination": "http://api-wallpapers.sa-east-1.elasticbeanstalk.com/api/posts/$1" },
-    { "source": "/api/posts", "destination": "http://api-wallpapers.sa-east-1.elasticbeanstalk.com/api/posts" }
+    { "source": "/api/posts/latest", "destination": "http://vividwalls-api.sa-east-1.elasticbeanstalk.com/api/posts/latest" },
+    { "source": "/api/posts/(.*)", "destination": "http://vividwalls-api.sa-east-1.elasticbeanstalk.com/api/posts/$1" },
+    { "source": "/api/posts", "destination": "http://vividwalls-api.sa-east-1.elasticbeanstalk.com/api/posts" },
+    { "source": "/api/login", "destination": "http://vividwalls-api.sa-east-1.elasticbeanstalk.com/api/login" },
+    { "source": "/api/register", "destination": "http://vividwalls-api.sa-east-1.elasticbeanstalk.com/api/register" },
+    { "source": "/api/user", "destination": "http://vividwalls-api.sa-east-1.elasticbeanstalk.com/api/user" },
+    { "source": "/api/user", "destination": "http://vividwalls-api.sa-east-1.elasticbeanstalk.com/api/logout" }
   ]
 }

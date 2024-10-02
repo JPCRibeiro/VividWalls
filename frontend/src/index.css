@@ -4,6 +4,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Fascinate+Inline&display=swap');
 
+:root {
+  --primary-color: #03e3b8;
+}
+
 body, html {
   height: 100%;
   width: 100%;
@@ -32,104 +36,122 @@ body {
   font-style: normal;
 }
 
-.wrapper{
-  width: 430px;
-  background: #fff;
-  border-radius: 5px;
-  padding: 30px;
-  box-shadow: 7px 7px 12px rgba(0,0,0,0.05);
-}
-.wrapper header{
-  color: #6990F2;
-  font-size: 27px;
-  font-weight: 600;
-  text-align: center;
-}
-.wrapper form{
-  height: 167px;
-  display: flex;
-  cursor: pointer;
-  margin: 30px 0;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  border-radius: 5px;
-  border: 2px dashed #6990F2;
-}
-form :where(i, p){
-  color: #6990F2;
-}
-form i{
-  font-size: 50px;
-}
-form p{
-  margin-top: 15px;
-  font-size: 16px;
+@supports (scrollbar-width: auto) {
+  * {
+    scrollbar-color: rgba(255, 255, 255, 0.2) rgba(0, 0, 0, 0);
+  }
 }
 
-section .row{
-  margin-bottom: 10px;
-  background: #E9F0FF;
-  list-style: none;
-  padding: 15px 20px;
-  border-radius: 5px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+@supports selector(::-webkit-scrollbar) {
+  html:has(input[name="fix-safari"]:checked) :hover {
+    --safari-fix: ; 
+  }
+  ::-webkit-scrollbar {
+    width: 15px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0c0d0e;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: #474747;
+    border-right: 2px solid #030F17;
+  }
+  ::-webkit-scrollbar-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: no-repeat #0c0d0e;
+    background-size: 10px;
+    background-position: center bottom;
+  }
+  ::-webkit-scrollbar-button:vertical:decrement {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='125' height='125' fill='rgb(71, 71, 71)'><polygon points='0,50 100,50 50,0'/></svg>");
+  }
+  ::-webkit-scrollbar-button:vertical:increment {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='125' height='125' fill='rgb(71, 71, 71)'><polygon points='0,0 100,0 50,50'/></svg>");
+  }  
 }
-section .row i{
-  color: #6990F2;
-  font-size: 30px;
+
+.input-box {
+  position: relative;
 }
-section .details span{
-  font-size: 14px;
+
+.login-input-box svg {
+  position: absolute;
+  height: 20px;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #7f858d;
+  font-size: 18px;
 }
-.progress-area .row .content{
+
+.input-box label {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 48px;
+  transition: 300ms;
+  pointer-events: none;
+  color: rgb(127, 133, 141);
+  color: white;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  font-weight: 500;
+}
+
+.register-input-box label {
+  left: 16px;
+}
+
+.input-box input {
+  padding: 12px 16px 12px 48px;
+  border-radius: 3px;
+  background-color: transparent;
   width: 100%;
-  margin-left: 15px;
+  outline: none;
+  color: rgb(35, 38, 43);
+  color: white;
 }
-.progress-area .details{
-  display: flex;
-  align-items: center;
-  margin-bottom: 7px;
-  justify-content: space-between;
+
+.input-pad {
+  padding: 12px 16px 12px 16px !important;
 }
-.progress-area .content .progress-bar{
-  height: 6px;
-  width: 100%;
-  margin-bottom: 4px;
-  background: #fff;
-  border-radius: 30px;
+
+.input-box input:focus ~ label,
+.input-box input:not(:placeholder-shown) ~ label {
+  top: 0;
+  left: 20px;
+  background: #15161a;
+  padding: 0px 5px;
+  color: var(--primary-color);
 }
-.content .progress-bar .progress{
-  height: 100%;
-  width: 0%;
-  background: #6990F2;
-  border-radius: inherit;
+
+.input-box input:focus ~ .input-error,
+.input-box input:not(:placeholder-shown) ~ .input-error {
+  color: #ad3e3e !important;
 }
-.uploaded-area{
-  max-height: 232px;
-  overflow-y: scroll;
+
+.register-input-box input:focus ~ label,
+.register-input-box input:not(:placeholder-shown) ~ label {
+  left: 12px;
 }
-.uploaded-area.onprogress{
-  max-height: 150px;
+
+.input-box input:not(:focus) ~ label {
+  color: rgb(127, 133, 141);
 }
-.uploaded-area::-webkit-scrollbar{
-  width: 0px;
+
+.input-box input:not(:focus) ~ .input-error {
+  color: #ad3e3e;
 }
-.uploaded-area .row .content{
-  display: flex;
-  align-items: center;
+
+img.lazyload {
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
 }
-.uploaded-area .row .details{
-  display: flex;
-  margin-left: 15px;
-  flex-direction: column;
-}
-.uploaded-area .row .details .size{
-  color: #404040;
-  font-size: 11px;
-}
-.uploaded-area i.fa-check{
-  font-size: 16px;
+
+img.lazyload.loaded {
+  opacity: 1;
+  box-shadow: 0 0 4px rgba(0, 0, 0, .8);
 }
