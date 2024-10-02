@@ -10,7 +10,7 @@ export const UserProvider = ({ children }) => {
   const fetchUserData = async () => {
     setIsLoading(true);
     try {
-      const response = await axios.get("http://localhost:8080/api/user", {
+      const response = await axios.get("/api/user", {
         withCredentials: true, 
       });
       setUser(response.data.user);

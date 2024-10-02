@@ -4,7 +4,7 @@ export async function imagePageLoader({ params }) {
   const { imageName } = params;
 
   try {
-    const response = await axios.get(`http://localhost:8080/api/posts/${imageName}`);
+    const response = await axios.get(`/api/posts/${imageName}`);
     return {
       wallpaper: response.data,
       error: null 

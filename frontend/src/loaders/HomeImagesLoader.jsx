@@ -2,8 +2,8 @@ import axios from "axios";
 
 export async function homeImagesLoader() {
   try {
-    const smallImages = await axios.get("http://localhost:8080/api/posts/small");
-    const largeImages = await axios.get("http://localhost:8080/api/posts/large");
+    const smallImages = await axios.get("/api/posts/small");
+    const largeImages = await axios.get("/api/posts/large");
 
     return {
       smallImages: smallImages.data,

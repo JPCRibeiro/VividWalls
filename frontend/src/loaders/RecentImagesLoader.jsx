@@ -2,7 +2,7 @@ import axios from "axios";
 
 export async function recentImagesLoader() {
   try {
-    const response = await axios.get("http://localhost:8080/api/posts/latest");
+    const response = await axios.get("/api/posts/latest");
     return { 
       wallpapers: response.data, 
       error: null 

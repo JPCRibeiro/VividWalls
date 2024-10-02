@@ -45,7 +45,7 @@ export default function RegisterForm() {
       setEmailError(null);
       setPasswordError(null);
 
-      await axios.post("http://localhost:8080/api/register", formValues);
+      await axios.post("/api/register", formValues);
 
       navigate("/recentes");
     } catch (err) {

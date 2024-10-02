@@ -10,7 +10,7 @@ export default function Header() {
 
   const handleLogout = async () => {
     try {
-      await axios.post('http://localhost:8080/api/logout', {}, {
+      await axios.post('/api/logout', {}, {
         withCredentials: true,
       });
       logout();

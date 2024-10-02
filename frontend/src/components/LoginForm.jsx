@@ -40,13 +40,9 @@ export default function LoginForm() {
       setEmailError(null);
       setPasswordError(null);
 
-      const response = await axios.post(
-        "http://localhost:8080/api/login",
-        formValues,
-        {
-          withCredentials: true,
-        }
-      );
+      const response = await axios.post("/api/login", formValues, {
+        withCredentials: true,
+      });
 
       if (response.status === 200) {
         await fetchUserData();
