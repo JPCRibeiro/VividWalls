@@ -12,6 +12,8 @@ export default function RegisterForm() {
   const [emailError, setEmailError] = useState(null);
   const [password, setPassword] = useState("");
   const [passwordError, setPasswordError] = useState(null);
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [confirmPasswordError, setConfirmPasswordError] = useState(null);
   const navigate = useNavigate();
 
   const validationSchema = Yup.object().shape({
@@ -27,6 +29,9 @@ export default function RegisterForm() {
       .trim()
       .min(6, "A senha deve ter pelo menos 6 caracteres")
       .required("Senha é obrigatória"),
+    confirmPassword: Yup.string()
+      .oneOf([Yup.ref('password'), null], "As senhas devem coincidir")
+      .required("Confirmar senha é obrigatório"),
   });
 
   const submit = async (e) => {
@@ -36,6 +41,7 @@ export default function RegisterForm() {
       username: username.trim(),
       email: email.trim(),
       password: password.trim(),
+      confirmPassword: confirmPassword.trim(),
     };
 
     try {
@@ -44,10 +50,11 @@ export default function RegisterForm() {
       setUsernameError(null);
       setEmailError(null);
       setPasswordError(null);
+      setConfirmPasswordError(null);
 
       await axios.post("/api/register", formValues);
 
-      navigate("/recentes");
+      navigate("/login");
     } catch (err) {
       if (err instanceof Yup.ValidationError) {
         err.inner.forEach((error) => {
@@ -57,8 +64,16 @@ export default function RegisterForm() {
             setEmailError(error.message);
           } else if (error.path === "password") {
             setPasswordError(error.message);
+          } else if (error.path === "confirmPassword") {
+            setConfirmPasswordError(error.message);
           }
         });
+      } else if (err.response && err.response.status === 409) {
+        if (err.response.data.message.includes("E-mail")) {
+          setEmailError(err.response.data.message); 
+        } else if (err.response.data.message.includes("Nome de usuário")) {
+          setUsernameError(err.response.data.message); 
+        }
       } else {
         console.error("Erro ao registrar usuário:", err);
       }
@@ -105,6 +120,16 @@ export default function RegisterForm() {
         autocomplete="current-password"
         error={passwordError}
         setError={setPasswordError}
+      />
+      <InputComponent
+        id="confirmPassword"
+        title={confirmPassword}
+        setTitle={setConfirmPassword}
+        type="password"
+        label="Confirmar Senha"
+        autocomplete="new-password"
+        error={confirmPasswordError}
+        setError={setConfirmPasswordError}
       />
       <div className="mt-[10px]">
         <Button type="submit" text="Criar" color="green" />

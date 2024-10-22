@@ -10,12 +10,16 @@ class GetUserUseCase {
     const user = await this.prismaRepository.getUser({ email });
 
     if (!user) {
-      throw new Error("Usuário não encontrado");
+      const error = new Error("Usuário não encontrado");
+      error.code = "USER_NOT_FOUND";
+      throw error;
     }
 
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
-      throw new Error("Credenciais inválidas");
+      const error = new Error("Senha incorreta");
+      error.code = "INVALID_CREDENTIALS";
+      throw error;
     }
 
     const validUser = {

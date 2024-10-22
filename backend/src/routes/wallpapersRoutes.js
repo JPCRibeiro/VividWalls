@@ -5,6 +5,7 @@ import uploadImage from "../middleware/imageUpload.js";
 const router = express.Router();
 const postController = new PostController();
 
+router.get("/api/posts/query", postController.getQueryImage);
 router.get("/api/posts/latest", postController.getAllPosts);
 router.get("/api/posts/small", postController.getSmallImages);
 router.get("/api/posts/large", postController.getLargeImages);

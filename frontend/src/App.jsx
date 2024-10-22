@@ -7,9 +7,11 @@ import Header from "./components/Header";
 import NotFoundPage from "./pages/NotFound";
 import RegisterPage from "./pages/Register";
 import LoginPage from "./pages/Login";
+import SearchPage from "./pages/Search";
 import { recentImagesLoader } from "./loaders/RecentImagesLoader";
 import { homeImagesLoader } from "./loaders/HomeImagesLoader";
 import { imagePageLoader } from "./loaders/ImagePageLoader";
+import { queryImagesLoader } from "./loaders/QueryImagesLoader";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +26,11 @@ const router = createBrowserRouter([
         path: "recentes",
         element: <ImagesPage />,
         loader: recentImagesLoader
+      },
+      {
+        path: "search",
+        element: <SearchPage />,
+        loader: queryImagesLoader
       },
       {
         path: "upload",

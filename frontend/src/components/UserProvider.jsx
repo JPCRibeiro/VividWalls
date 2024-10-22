@@ -15,8 +15,11 @@ export const UserProvider = ({ children }) => {
       });
       setUser(response.data.user);
     } catch (error) {
-      console.error("Erro ao obter informações do usuário:", error);
-      setUser(null);
+      if (error.response && error.response.status === 404) {
+        setUser(null); 
+      } else {
+        console.error("Erro ao obter informações do usuário:", error);
+      }
     } finally {
       setIsLoading(false);
     }

@@ -22,6 +22,10 @@ class WallpaperRepository {
   async getLargeImages() {
     throw new Error("Method not implemented");
   }
+  
+  async getQueryImage() {
+    throw new Error("Method not implemented");
+  }
 }
 
 export default WallpaperRepository;

@@ -57,6 +57,13 @@ export default function LoginForm() {
             setPasswordError(error.message);
           }
         });
+      } else if (error.response) {
+        // Lida com erros vindos do backend
+        if (error.response.data.message === "Usuário não encontrado") {
+          setEmailError("Usuário não encontrado");
+        } else if (error.response.data.message === "Senha incorreta") {
+          setPasswordError("Senha incorreta");
+        }
       } else {
         console.error("Erro ao fazer login:", error);
       }

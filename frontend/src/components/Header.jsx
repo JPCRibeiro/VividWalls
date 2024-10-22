@@ -1,29 +1,21 @@
-import { Link, NavLink, Outlet, ScrollRestoration, useNavigate } from "react-router-dom";
+import { Link, NavLink, Outlet, ScrollRestoration, useLocation } from "react-router-dom";
 import Button from "./Button";
 import { useContext } from "react";
 import { UserContext } from "./UserProvider";
-import axios from "axios";
+import SearchBar from "./SearchBar";
+import Footer from "./Footer";
+import UserLogout from "./UserLogout";
 
 export default function Header() {
-  const { user, logout, isLoading } = useContext(UserContext);
-  const navigate = useNavigate();
+  const { user, isLoading } = useContext(UserContext);
+  const location = useLocation();
 
-  const handleLogout = async () => {
-    try {
-      await axios.post('/api/logout', {}, {
-        withCredentials: true,
-      });
-      logout();
-      navigate("/");
-    } catch (error) {
-      console.error('Erro ao fazer logout:', error);
-    }
-  };
+  const isImagePage = location.pathname.startsWith("/wp");
 
-  return(
+  return (
     <div className="w-full h-full">
-      <header className="w-full fixed top-0 h-[60px] bg-[#0c0d0e] z-[200] flex items-center [box-shadow:inset_0_0_0_0px_rgba(31,_31,_31,_.66),_0_0_10px_rgba(0,_0,_0,_.75),_0_0_10px_rgba(0,_0,_0,_.75)] px-[40px] justify-between border-b-[1px] border-b-[rgba(31,31,31,.66)]">
-        <div className="flex items-center h-full">
+      <header className="w-full fixed top-0 h-[60px] bg-[#0c0d0e] z-[200] flex items-center [box-shadow:inset_0_0_0_0px_rgba(31,_31,_31,_.66),_0_0_10px_rgba(0,_0,_0,_.75),_0_0_10px_rgba(0,_0,_0,_.75)] px-[40px] justify-between">
+        <div className="flex items-center h-full flex-grow">
           <Link to="/" className="flex">
             <h2 className="font-bold text-white text-[28px] select-none title">VividWalls</h2>
           </Link>
@@ -35,28 +27,22 @@ export default function Header() {
               Upload
             </NavLink>
           </div>
+          <SearchBar/>
         </div>
         {!isLoading && ( 
-          user ? (
-            <div className="flex items-center gap-[12px]">
-              <div className="flex text-white font-[500]">
-                Bem-vindo,
-                <span className="text-primary-color ml-[6px]">{user.username}</span>
+            user ? (
+              <UserLogout/>
+            ) : (
+              <div className="flex gap-[10px] font-[500] text-[#141618] text-[14px]">
+                <Button as="Link" to="/cadastro" text="Cadastrar" color="green" />
+                <Button as="Link" to="/login" text="Login" color="white" />
               </div>
-              <div>
-                <Button text="Sair" color="green" onClick={handleLogout} />
-              </div>
-            </div>
-          ) : (
-            <div className="flex gap-[10px] font-[500] text-[#141618] text-[14px]">
-              <Button as="Link" to="/cadastro" text="Cadastrar" color="green" />
-              <Button as="Link" to="/login" text="Login" color="white" />
-            </div>
-          ))
-        }
+            ))
+          }
       </header>
       <ScrollRestoration/>
       <Outlet/>
+      {!isImagePage && <Footer />}
     </div>
   )
 }

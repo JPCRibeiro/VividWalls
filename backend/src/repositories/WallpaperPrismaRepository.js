@@ -50,6 +50,14 @@ class PrismaPostRepository extends WallpaperRepository {
     });
     return posts;
   };
+
+  async getQueryImage(queryParam) {
+    const posts = await this.prisma.posts.findMany({
+      where: { caption: { contains: queryParam } },
+    });
+
+    return posts;
+  }
 }
 
 export default PrismaPostRepository;

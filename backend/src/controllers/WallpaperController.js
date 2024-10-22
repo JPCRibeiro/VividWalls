@@ -5,6 +5,7 @@ import GetAllPosts from "../useCases/wallpapersUseCase/GetAllPostsUseCase.js";
 import FindByImageName from "../useCases/wallpapersUseCase/FindByImageNameUseCase.js";
 import GetSmallImages from "../useCases/wallpapersUseCase/GetSmallImagesUseCase.js";
 import GetLargeImages from "../useCases/wallpapersUseCase/GetLargeImagesUseCase.js";
+import GetQueryImage from "../useCases/wallpapersUseCase/GetQueryImageUseCase.js";
 
 class PostController {
   constructor() {
@@ -15,6 +16,7 @@ class PostController {
     this.getAllPostsUseCase = new GetAllPosts(prismaRepository, bucketService);
     this.getSmallImagesUseCase = new GetSmallImages(prismaRepository, bucketService);
     this.getLargeImagesUseCase = new GetLargeImages(prismaRepository, bucketService);
+    this.getQueryImagesUseCase = new GetQueryImage(prismaRepository, bucketService);
   }
 
   create = async (req, res) => {
@@ -78,6 +80,17 @@ class PostController {
       res.status(500).json({ message: "Erro ao buscar posts" });
     }
   };
+
+  getQueryImage = async (req, res) => {
+    try {
+      const { caption } = req.query; 
+      const posts = await this.getQueryImagesUseCase.execute(caption);
+      res.status(200).json(posts);
+    } catch (error) {
+      console.error("Erro ao buscar posts:", error);
+      res.status(500).json({ message: "Erro ao buscar posts" });
+    }
+  }
 }
 
 export default PostController;
