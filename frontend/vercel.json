@@ -1,7 +1,7 @@
 {
   "rewrites": [
-    { "source": "/api/posts/latest", "destination": "http://vividwalls-api.sa-east-1.elasticbeanstalk.com/api/posts/latest" },
     { "source": "/api/posts/query", "destination": "http://vividwalls-api.sa-east-1.elasticbeanstalk.com/api/posts/query" },
+    { "source": "/api/posts/latest", "destination": "http://vividwalls-api.sa-east-1.elasticbeanstalk.com/api/posts/latest" },
     { "source": "/api/posts/(.*)", "destination": "http://vividwalls-api.sa-east-1.elasticbeanstalk.com/api/posts/$1" },
     { "source": "/api/posts", "destination": "http://vividwalls-api.sa-east-1.elasticbeanstalk.com/api/posts" },
     { "source": "/api/login", "destination": "http://vividwalls-api.sa-east-1.elasticbeanstalk.com/api/login" },
